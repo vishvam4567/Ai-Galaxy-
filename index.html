@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI GALAXY</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #302064, #08051c 65%);
+  color: white;
+  min-height: 100vh;
+}
+header {
+  padding: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff0c;
+}
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+  color: #65eaff;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 18px;
+}
+.hero {
+  text-align: center;
+  padding: 85px 20px;
+}
+.hero h1 {
+  font-size: clamp(40px, 8vw, 65px);
+  background: linear-gradient(90deg, #fff, #9b6cff, #53e5ff);
+  background-clip: text;
+  color: transparent;
+}
+.hero p {
+  color: #ccc;
+  margin: 20px auto;
+  max-width: 600px;
+  line-height: 1.6;
+}
+button {
+  padding: 13px 22px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(90deg, #53e5ff, #a36cff);
+  color: #09051c;
+  font-weight: bold;
+  cursor: pointer;
+}
+.section {
+  padding: 30px 7% 70px;
+  text-align: center;
+}
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+.tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: #ffffff10;
+  border: 1px solid #ffffff25;
+  border-radius: 18px;
+  padding: 25px;
+  transition: 0.3s;
+}
+.card:hover {
+  transform: translateY(-8px);
+  background: #ffffff20;
+}
+.icon {
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+.card h3 {
+  margin-bottom: 12px;
+}
+.card p {
+  color: #bbb;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+#output {
+  display: none;
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 600px;
+  background: #ffffff15;
+  border-radius: 15px;
+  white-space: pre-wrap;
+}
+textarea {
+  width: 100%;
+  max-width: 600px;
+  height: 110px;
+  padding: 15px;
+  border-radius: 12px;
+  margin: 15px 0;
+  font-size: 16px;
+}
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #aaa;
+  border-top: 1px solid #ffffff20;
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">🌌 AI GALAXY</div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#tools">AI Tools</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+<section class="hero" id="home">
+  <h1>WELCOME TO AI GALAXY</h1>
+  <p>
+    Explore the universe of Artificial Intelligence.
+    Create, learn, write and discover amazing possibilities!
+  </p>
+  <button onclick="document.getElementById('tools').scrollIntoView({behavior:'smooth'})">
+    EXPLORE AI TOOLS 🚀
+  </button>
+</section>
+<section class="section" id="tools">
+  <h2>✨ Explore AI Tools</h2>
+  <div class="tools">
+    <div class="card">
+      <div class="icon">🤖</div>
+      <h3>AI Chatbot</h3>
+      <p>Ask questions and explore ideas.</p>
+      <button onclick="openTool('AI Chatbot')">Open Tool</button>
+    </div>
+    <div class="card">
+      <div class="icon">🎨</div>
+      <h3>AI Image Studio</h3>
+      <p>Turn your imagination into artwork.</p>
+      <button onclick="openTool('AI Image Studio')">Open Tool</button>
+    </div>
+    <div class="card">
+      <div class="icon">✍️</div>
+      <h3>AI Writer</h3>
+      <p>Write stories, essays and paragraphs.</p>
+      <button onclick="openTool('AI Writer')">Open Tool</button>
+    </div>
+    <div class="card">
+      <div class="icon">📚</div>
+      <h3>Study Buddy</h3>
+      <p>Make learning easier and more fun.</p>
+      <button onclick="openTool('Study Buddy')">Open Tool</button>
+    </div>
+    <div class="card">
+      <div class="icon">🌍</div>
+      <h3>Translator</h3>
+      <p>Prepare text for translation.</p>
+      <button onclick="openTool('Translator')">Open Tool</button>
+    </div>
+    <div class="card">
+      <div class="icon">📝</div>
+      <h3>Text Summarizer</h3>
+      <p>Summarize long text into key points.</p>
+      <button onclick="openTool('Text Summarizer')">Open Tool</button>
+    </div>
+    <div class="card">
+      <div class="icon">💡</div>
+      <h3>Idea Generator</h3>
+      <p>Discover new creative ideas.</p>
+      <button onclick="openTool('Idea Generator')">Open Tool</button>
+    </div>
+    <div class="card">
+      <div class="icon">🎙️</div>
+      <h3>Voice Studio</h3>
+      <p>Prepare text for voice narration.</p>
+      <button onclick="openTool('Voice Studio')">Open Tool</button>
+    </div>
+  </div>
+  <div id="workspace" style="margin-top:40px">
+    <h2 id="toolTitle">Choose an AI Tool</h2>
+    <textarea id="userInput" placeholder="Enter your text here..."></textarea>
+    <br>
+    <button onclick="generate()">Generate ✨</button>
+    <div id="output"></div>
+  </div>
+</section>
+<section class="section" id="about">
+  <h2>🌌 About AI Galaxy</h2>
+  <p>
+    AI Galaxy is your universe of creativity, learning
+    and artificial intelligence.
+  </p>
+</section>
+<footer>
+  © 2026 AI GALAXY | Explore. Create. Learn.
+</footer>
+<script>
+let currentTool = "";
+function openTool(tool) {
+  currentTool = tool;
+  document.getElementById("toolTitle").innerText = tool;
+  document.getElementById("workspace").scrollIntoView({
+    behavior: "smooth"
+  });
+  document.getElementById("output").style.display = "none";
+}
+function generate() {
+  let input = document.getElementById("userInput").value.trim();
+  if (!input) {
+    alert("Please enter something first!");
+    return;
+  }
+  let response = "";
+  if (currentTool === "Idea Generator") {
+    response = "💡 Creative idea: " + input +
+    "\n\nTry turning this into an interactive project!";
+  }
+  else if (currentTool === "AI Writer") {
+    response = "✍️ Writing starter:\n\n" + input +
+    "\n\nExpand this idea with an introduction, main points and conclusion.";
+  }
+  else if (currentTool === "Study Buddy") {
+    response = "📚 Study tip:\n\nBreak this topic into smaller sections. Learn one section at a time and test yourself with questions.";
+  }
+  else if (currentTool === "Text Summarizer") {
+    let words = input.split(/\s+/);
+    response = "📝 Text preview:\n\n" +
+    words.slice(0, Math.min(30, words.length)).join(" ") +
+    (words.length > 30 ? "..." : "");
+  }
+  else if (currentTool === "Translator") {
+    response = "🌍 Translation tool selected.\nConnect a translation service to translate your text into another language.";
+  }
+  else if (currentTool === "AI Chatbot") {
+    response = "🤖 Welcome to AI Galaxy!\n\nYou asked: " + input +
+    "\n\nThis is a demo response. Connect an AI API for real conversations.";
+  }
+  else if (currentTool === "AI Image Studio") {
+    response = "🎨 Your image prompt:\n\n" + input +
+    "\n\nConnect an image-generation service to create the actual image.";
+  }
+  else if (currentTool === "Voice Studio") {
+    response = "🎙️ Voice script:\n\n" + input +
+    "\n\nConnect a text-to-speech service to generate audio.";
+  }
+  document.getElementById("output").innerText = response;
+  document.getElementById("output").style.display = "block";
+}
+</script>
+</body>
+</html>
